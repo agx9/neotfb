@@ -1,0 +1,119 @@
+
+
+ <body>
+      <div id="fb-root"></div>
+      <script>
+        window.fbAsyncInit = function() {
+          FB.init({
+            appId      : '<?php echo $this->fbAppId;?>',
+            status     : true,
+            cookie     : true,
+            xfbml      : true
+          });
+        };
+        (function(d){
+           var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
+           js = d.createElement('script'); js.id = id; js.async = true;
+           js.src = "//connect.facebook.net/en_US/all.js";
+           d.getElementsByTagName('head')[0].appendChild(js);
+         }(document));
+      </script>
+ 
+
+
+
+
+
+
+
+
+      <a href="#" id="ff"  class="fb-login-button" onclick="fb()">Get Groups</a>&nbsp;&nbsp;&nbsp;
+      <a href="<?php echo $this->resourcePath;?>/group/updatelist" >Clean Group List</a>
+      <br/><br/>
+
+      <script>
+      function fb() {
+              FB.login(function(response) {
+                       if (response.authResponse) {
+
+                       var accessToken = response.authResponse.accessToken;
+window.location.href = 'group/get/token/'+ accessToken.valueOf();
+                                        return false;
+                   } else {
+                         alert('User cancelled login or did not fully authorize.');
+                       }
+                     },{scope: 'email,user_groups'});
+      }
+      </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table class="listings groups">
+
+    	<tr>
+    		<th scope="col"  width="100"><?php echo 'No';?></th>
+    		<th scope="col"  width="600"><?php echo 'Name';?></th>
+    		<th scope="col"  width="100"><?php echo 'Email';?></th>
+                <th scope="col"  width="100"><?php echo 'Details';?></th>
+    		<th scope="col"  width="100"><?php echo 'Action';?></th>
+                <th scope="col"  width="100"><?php echo 'Select';?></th>
+
+    	</tr>
+
+
+<?php if (count($this->paginator)): ?>
+      <form action="" method="post">
+
+  <?php foreach ($this->paginator as $group): ?>
+    <tr height="30" align="center">
+        <td><?php echo (++$this->postCounter); ?> </td>
+        <td><a href ="http://facebook.com/<?php echo $group->GroupId; ?>"><?php echo html_entity_decode($group->Name, ENT_COMPAT, 'UTF-8'); ?></a></td>
+        <td><?php echo $group->Email; ?></td>
+        <td>Page</td>
+        <td><a href="<?php echo $this->resourcePath;?>/group/switch/id/<?php echo $group->Id; ?>?page=<?php echo $this->redirectPage;?>"><?php if($group->Status == 1): ?>Deactivate<?php else: ?>Activate<?php endif; ?></a></td>
+        <td><input type="checkbox" name="<?php echo $group->Id; ?>" value="deactivate" /></td>
+
+    </tr>
+
+
+<?php endforeach; ?>
+
+
+      <tr height="30">
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>
+      <input type="submit" name="deactivate" size="80" value="activate/deactivate"/></td>
+      </tr>
+
+     </form>
+
+      
+<?php endif; ?>
+
+</table>
+
+        
+<?php echo $this->paginationControl($this->paginator,
+                                    'Sliding',
+                                    '/helper/common/pagination.phtml',array("search"=>$this->search)); ?>
+
+
+  </body>
+
+
+
+    

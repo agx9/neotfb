@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset=UTF-8">
+    <title>My FB Application</title>
+    <link href="<?php echo $this->resourcePath;?>/css/styles.css" rel="stylesheet" type="text/css">
+    <script src="<?php echo $this->resourcePath;?>/js/jquery-1.6.2.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="./fbapp_files/jquery.colorbox-min.js"></script>
+<script type="text/javascript" src="./fbapp_files/functions.js"></script><link href="./fbapp_files/colorbox.css" media="screen" rel="stylesheet" type="text/css">    </head>
+    <body>
+        <div class="header">
+            <div class="login-menu">
+                <div class="container">
+                    <ul id="login-menu">
+                    <?php if($this->loggedIn) :?>
+                    <li><a href="<?php echo $this->resourcePath;?>/post">Posts</a></li>
+                    <li><a href="<?php echo $this->resourcePath;?>/group">Groups</a></li>
+                    <li><a href="<?php echo $this->resourcePath;?>/config">Config</a></li>
+                    <li><a href="<?php echo $this->resourcePath;?>/friends">Friends</a></li>
+                    <li><a href="<?php echo $this->resourcePath;?>/user">Users</a></li>
+                    <?php endif;?>
+                    <li><a id="loginlink" href="<?php if($this->loggedIn) : ?><?php echo $this->resourcePath;?>/user/signout<?php else:?>/user/signin<?php endif; ?>" class="cboxElement"><?php if($this->loggedIn) : ?>Logout <?php else:?>Login<?php endif; ?></a></li>
+                    
+                    </ul>
+               </div>
+            </div>
+        </div>
+        <div class="container content-area">
+	    	<form class="search-form" action="" method="get">
+		    <input class="search-bar" id="searchQuery" type="text" speech x-webkit-speech name="search" placeholder="Search"   value="">
+		    <input type="submit" class="itrustyou" name="Post" value="Search">
+		</form>
+        </div>
+	<div class='content container'>
+
+            <?php echo $this->layout()->content;?>
+	</div>
+
+
+        <div class="footer-wrap">
+        <div class="footer">
+            <div class="container">
+                <h3>&nbsp;</h3>
+                <ul id="latest-decisions">
+                <li><a href=" ">&nbsp;</a></li>
+                <li><a href=" ">&nbsp;</a></li>
+                <li><a href=" ">&nbsp;</a></li>
+                </ul>
+                <h4>&nbsp;</h4>
+            </div>
+        </div>
+        <div id="footer-bottom">
+            <div class="container">
+                <ul id="footer-menu">                
+                <li><a href=" ">About FB Application</a></li>
+                <li></li></ul>
+                <p>copyright &copy; FB Application 2012</p>
+            </div>
+        </div>
+	</div>
+</body>
+</html>

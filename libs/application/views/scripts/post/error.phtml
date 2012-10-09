@@ -1,0 +1,33 @@
+<div id="tablewrp">
+    <table class="listings posts" cellspacing="0">
+
+    	<tr>
+    		<th scope="col"  width="100"><?php echo 'No';?></th>
+    		<th scope="col"  width="600"><?php echo 'Group';?></th>
+                <th scope="col"  width="600"><?php echo 'Visit';?></th>
+                <th scope="col"  width="600"><?php echo 'Post';?></th>
+    	
+        
+    	</tr>
+
+
+<?php if (count($this->errors)): ?>
+<?php $i =0; ?>
+ <?php foreach ($this->errors as $error): ?>
+    <tr height="30">
+        <td><?php echo $i++; ?></td>
+        <td><?php echo $error->GroupId; ?></td>
+        <td><a href="http://facebook.com/<?php echo $error->GroupId; ?>">Visit</a></td>
+        <td><?php echo $error->PostId; ?></td>
+        
+        
+        
+
+    </tr>
+
+
+ <?php endforeach; ?>
+
+<?php endif; ?>
+
+   </table>

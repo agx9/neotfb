@@ -1,0 +1,27 @@
+<?php
+
+class IndexController extends Zend_Controller_Action
+{
+
+    public function init()
+    {
+        /* Initialize action controller here */
+    }
+
+    public function indexAction()
+    {
+        //get config
+        $config =  Zend_Registry::getInstance()->get('config');
+        $this->_redirect($config->_resource_path.'/post');
+    }
+
+    public function insertToPQAction()
+    {
+        // action body
+    }
+
+
+}
+
+
+

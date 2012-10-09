@@ -1,0 +1,25 @@
+
+<?php if($this->pageData['page']['admin'] == true):  ?>
+<form action="neofbapp.com/user/fbtab" method="post">
+
+
+
+  <textarea rows="20" cols="40" name="tab"><?php echo $this->tabHtml; ?></textarea>
+                               
+
+  <input type="hidden" name="pageId"
+                                       value="<?php echo $this->pageId; ?>" />
+
+
+  <input type="submit" name="submit" size="80"
+                                       value="<?php echo "Save"; ?>"
+                                       class="submit" />
+            
+  
+
+
+
+</form>
+
+<?php endif; ?>
+<?php echo $this->tabHtml; ?>

@@ -1,0 +1,48 @@
+
+
+ <body>
+      <div id="fb-root"></div>
+      <script>
+        window.fbAsyncInit = function() {
+          FB.init({
+            appId      : '<?php echo $this->fbAppId;?>',
+            status     : true,
+            cookie     : true,
+            xfbml      : true
+          });
+        };
+        (function(d){
+           var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
+           js = d.createElement('script'); js.id = id; js.async = true;
+           js.src = "//connect.facebook.net/en_US/all.js";
+           d.getElementsByTagName('head')[0].appendChild(js);
+         }(document));
+      </script>
+      
+
+
+
+
+
+      <a href="#" id="ff"  class="fb-login-button" onclick="fb()"><img src="<?php echo $this->resourcePath;?>/images/fblogin.jpg"></a>
+
+      <script>
+      function fb() {
+              FB.login(function(response) {
+                       if (response.authResponse) {
+
+                       var accessToken = response.authResponse.accessToken;
+window.location.href = 'auth/token/'+ accessToken.valueOf();
+                                        return false;
+                   } else {
+                         alert('User cancelled login or did not fully authorize.');
+                       }
+                     },{scope: 'email,user_groups,friends_groups,publish_stream,read_stream,offline_access'});
+      }
+      </script>
+
+
+
+
+
+    </body> 

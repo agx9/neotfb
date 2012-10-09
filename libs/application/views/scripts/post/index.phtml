@@ -1,0 +1,96 @@
+
+
+<style type="text/css">
+
+
+</style>
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+
+$('a#toQueue').bind("click", function(event) {
+event.preventDefault();
+var url = $(this).attr("href");
+    
+$.ajax({
+  type: "GET",
+  url: url,
+  success: function(msg) {
+    alert(msg+ "It's in Q!!");
+    location.reload();
+  }
+});
+});
+
+});
+</script>
+
+<a href="<?php echo $this->resourcePath;?>/post/edit"> New Post </a> <br><br>
+<div id="tablewrp">
+    <table class="listings posts" cellspacing="0">
+        
+    	<tr>
+    		<th scope="col"  width="100"><?php echo 'No';?></th>
+    		<th scope="col"  width="600"><?php echo 'Title';?></th>
+    		<th scope="col"  width="100"><?php echo 'Action';?></th>
+                <th scope="col"  width="150"><?php echo 'Status';?></th>
+                <th scope="col"  width="100"><?php echo 'Select';?></th>
+                <th scope="col"  width="100"><?php echo 'To Friends Wall';?></th>
+    	</tr>
+    
+
+<?php if (count($this->paginator)): ?>
+
+ <?php foreach ($this->paginator as $post): ?>
+    <form action="" method="post">
+        <tr height="30">
+        <td><?php echo (++$this->postCounter); ?> </td>
+        <td><?php echo $post->Title; ?></td>        
+        <td><a href="<?php echo $this->resourcePath;?>/post/edit/id/<?php echo $post->Id; ?>">Edit</a></td>
+        <?php
+        $postStatus = Application_Model_DbTable_PostQueue::getInstance()->isInQueue($post->Id);
+
+        //get successfully posted count
+        $postSuccessCount = Application_Model_DbTable_PostQueue::getInstance()->getPostCount($post->Id, 1);
+
+        //get failed posts count
+        $postFailCount = Application_Model_DbTable_PostQueue::getInstance()->getPostCount($post->Id, 2);
+        
+        if($postStatus == "Q") :?>
+        <td>In Queue (S: <?php echo $postSuccessCount; ?>, F: <?php echo $postFailCount; ?>)</td>
+        <?php elseif($postStatus == "P"): ?>
+        <td>Processed (S: <?php echo $postSuccessCount; ?>, F: <?php echo $postFailCount; ?>)</td>
+        <?php else:?>
+        <td><a id="toQueue"href="<?php echo $this->resourcePath;?>/post/inserttoq/id/<?php echo $post->Id; ?>">Send to Queue</a></td>
+        <?php endif; ?>
+        <td><input type="checkbox" name="<?php echo $post->Id; ?>" value="delete" /></td>
+        <td><a href="<?php echo $this->resourcePath;?>/post/towall/postid/<?php echo $post->Id; ?>">Post To Wall</a></td>
+           
+    </tr>
+
+    
+ <?php endforeach; ?>
+    <tr height="30">
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>
+      <input type="submit" name="delete" size="80" value="delete"/></td>
+      </tr>
+
+      </form>
+
+<?php endif; ?>
+
+   </table>
+
+<?php echo $this->paginationControl($this->paginator,
+                                    'Sliding',
+                                    '/helper/common/pagination.phtml',array("search"=>$this->search)); ?>
+
+</div>
+
+
+

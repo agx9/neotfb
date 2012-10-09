@@ -1,0 +1,1 @@
+INSERT INTO `ol_beats`.`config`(`Id`,`ConfigKey`,`Value`) VALUES ( NULL,'APP_FB_APPID','234579219946477');

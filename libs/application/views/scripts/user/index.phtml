@@ -1,0 +1,39 @@
+
+<a href="<?php echo $this->resourcePath;?>/user/add">Add User </a> <br><br>
+<div id="tablewrp">
+    <table class="listings posts" cellspacing="0">
+
+    	<tr>
+    		<th scope="col"  width="100"><?php echo 'No';?></th>
+    		<th scope="col"  width="600"><?php echo 'UserId';?></th>
+    		<th scope="col"  width="100"><?php echo 'Email';?></th>
+                <th scope="col"  width="100"><?php echo 'Action';?></th>
+    	</tr>
+
+
+<?php if (count($this->paginator)): ?>
+
+ <?php foreach ($this->paginator as $user): ?>
+    <tr height="30">
+        <td><?php echo (++$this->postCounter); ?> </td>
+        <td><?php echo $user->FbUserId; ?></td>
+        <td><?php echo $user->FbEmail; ?></td>        
+        <td><a href="<?php echo $this->resourcePath;?>/user/switch/id/<?php echo $user->Id; ?>?page=<?php echo $this->redirectPage;?>"><?php if($user->Status == 1): ?>Deactivate<?php else: ?>Activate<?php endif; ?></a></td>
+        
+    </tr>
+
+
+ <?php endforeach; ?>
+
+<?php endif; ?>
+
+   </table>
+
+<?php echo $this->paginationControl($this->paginator,
+                                    'Sliding',
+                                    '/helper/common/pagination.phtml'); ?>
+
+</div>
+
+
+

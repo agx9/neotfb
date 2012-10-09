@@ -1,0 +1,64 @@
+<a href="https://graph.facebook.com/oauth/authorize?type=user_agent&client_id=234579219946477
+&redirect_uri=http://neofbapp.com
+&scope=user_photos,user_videos,email,user_birthday,
+offline_access,publish_stream,status_update">
+Add Facebook
+</a>
+
+
+
+
+
+
+
+
+
+ 
+      <div id="fb-root"></div>
+      <script>
+        window.fbAsyncInit = function() {
+          FB.init({
+            appId      : '234579219946477',
+            status     : true,
+            cookie     : true,
+            xfbml      : true
+          });
+        };
+        (function(d){
+           var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
+           js = d.createElement('script'); js.id = id; js.async = true;
+           js.src = "//connect.facebook.net/en_US/all.js";
+           d.getElementsByTagName('head')[0].appendChild(js);
+         }(document));
+      </script>
+      <div class="fb-login-button">Login with Facebook</div>
+
+
+
+
+
+
+
+
+      <a href="#" id="ff"  class="fb-login-button" onclick="gg()">click</a>
+
+      <script>
+      function gg() {
+              FB.login(function(response) {
+                       if (response.authResponse) {
+
+                       var accessToken = response.authResponse.accessToken;
+window.location.href = 'land/token/'+ accessToken.valueOf();
+                                        return false;
+                   } else {
+                         alert('User cancelled login or did not fully authorize.');
+                       }
+                     },{scope: 'email,user_groups'});
+      }
+      </script>
+
+
+
+
+
+    
