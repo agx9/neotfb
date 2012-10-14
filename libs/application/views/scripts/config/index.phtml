@@ -23,23 +23,12 @@
             </tr>
 
             <tr class="odd">
-                <th colspan="2" class="left"><?php echo "Email Settings"?></th>
+                <th colspan="2" class="left"><?php echo "Post Settings"?></th>
             </tr>
-            <tr>
-                <td width="30%"><?php echo "Gmail ID";?></td>
-                <td width="70%"><input type="text" name="APP_GMAIL" size="80"
-                                       value="<?php echo base64_decode($this->config->_gmail); ?>"
-                                       class="input_textbox" /></td>
-            </tr>
-            <tr>
-                <td width="30%"><?php echo "Password";?></td>
-                <td width="70%"><input type="password" name="APP_GMAILPASSWORD" size="80"
-                                       value="<?php echo base64_decode($this->config->_gmailpassword); ?>"
-                                       class="input_textbox" /></td>
-            </tr>
+            
 
             <tr>
-                <td width="30%"><?php echo "No. of Email Posts/run (cronjob)";?></td>
+                <td width="30%"><?php echo "No. of Posts/run (cronjob)";?></td>
                 <td width="70%"><input type="text" name="APP_SENDMAIL_POSTCOUNT" size="80"
                                        value="<?php echo $this->config->_sendmail_postcount; ?>"
                                        class="input_textbox" /></td>
